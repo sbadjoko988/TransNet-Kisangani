@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b2634">
+  <meta name="description" content="TransNet Kisangani organise vos trajets entre l’aéroport de Bangboka et la ville.">
+  <title>TransNet Kisangani — Accueil</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { ink: '#0b2634', forest: '#0d6655', lime: '#d5f36a', mist: '#f4f7f3' } } } };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <style>body{font-family:'DM Sans',sans-serif}h1,h2,h3,.brand{font-family:'Manrope',sans-serif}#kisangani-map{height:26rem;z-index:0}</style>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body class="bg-mist text-ink antialiased">
+  <div class="bg-ink text-white">
+    <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-2 px-4 py-2.5 text-xs sm:px-6 lg:px-8">
+      <p><span class="mr-2 inline-block h-2 w-2 rounded-full bg-lime"></span>Assistance voyageurs disponible 24h/24 et 7j/7</p>
+      <a href="#contact" class="font-semibold text-lime hover:text-white">Besoin d’aide ? Nous contacter ↗</a>
+    </div>
+  </div>
+  <header class="sticky top-0 z-30 border-b border-ink/5 bg-white/95 backdrop-blur">
+    <div class="mx-auto flex max-w-7xl items-center justify-between gap-5 px-4 py-4 sm:px-6 lg:px-8">
+      <a href="index.html" class="brand flex items-center gap-3" aria-label="TransNet Kisangani, accueil">
+        <span class="grid h-11 w-11 place-items-center rounded-2xl bg-forest font-extrabold text-lime">TN</span>
+        <span class="leading-tight"><span class="block font-extrabold">TransNet</span><span class="block text-[11px] font-bold tracking-[.16em] text-forest">KISANGANI</span></span>
+      </a>
+      <nav class="hidden items-center gap-7 text-sm font-semibold text-ink/75 lg:flex" aria-label="Navigation principale">
+        <a href="index.html" aria-current="page" class="text-forest">Accueil</a>
+        <a href="reserver.html" class="hover:text-forest">Réserver</a>
+        <a href="#zones" class="hover:text-forest">Zones</a>
+        <a href="#carte" class="hover:text-forest">Carte GPS</a>
+        <a href="chauffeurs.html" class="hover:text-forest">Chauffeurs</a>
+        <a href="#contact" class="hover:text-forest">Contact</a>
+      </nav>
+      <label for="language" class="sr-only">Langue</label>
+      <select id="language" class="rounded-xl border border-ink/10 bg-white px-2.5 py-2 text-xs font-bold outline-none focus:border-forest" aria-label="Choisir la langue"><option value="fr">FR</option><option value="sw">SW</option></select>
+      <a href="reserver.html" class="hidden rounded-xl bg-forest px-4 py-2.5 text-sm font-bold text-white hover:bg-ink sm:inline-flex">Réserver un trajet</a>
+      <button class="grid h-10 w-10 place-items-center rounded-xl border border-ink/10 lg:hidden" data-menu-toggle aria-expanded="false" aria-controls="mobile-menu" aria-label="Ouvrir le menu">
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <nav id="mobile-menu" class="hidden border-t border-ink/5 bg-white px-4 py-3 lg:hidden" aria-label="Navigation mobile">
+      <div class="mx-auto grid max-w-7xl gap-1 text-sm font-semibold">
+        <a href="index.html" aria-current="page" class="rounded-lg px-3 py-2 text-forest">Accueil</a>
+        <a href="reserver.html" class="rounded-lg px-3 py-2 hover:bg-mist">Réserver</a>
+        <a href="#zones" class="rounded-lg px-3 py-2 hover:bg-mist">Zones</a>
+        <a href="#carte" class="rounded-lg px-3 py-2 hover:bg-mist">Carte GPS</a>
+        <a href="chauffeurs.html" class="rounded-lg px-3 py-2 hover:bg-mist">Chauffeurs</a>
+        <a href="#contact" class="rounded-lg px-3 py-2 hover:bg-mist">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="relative overflow-hidden bg-ink">
+      <div class="absolute -right-16 -top-36 h-[32rem] w-[32rem] rounded-full border border-white/15" aria-hidden="true"></div>
+      <div class="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8 lg:py-36">
+        <div class="max-w-3xl">
+          <p class="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-semibold text-lime"><span class="h-1.5 w-1.5 rounded-full bg-lime"></span>Aéroport de Bangboka · Kisangani</p>
+          <h1 class="text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">Votre arrivée à Kisangani, <span class="text-lime">en toute sérénité.</span></h1>
+          <p class="mt-6 max-w-2xl text-base leading-7 text-white/70 sm:text-lg">Organisez votre transfert entre l’aéroport international de Bangboka et votre destination avec un chauffeur partenaire.</p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="reserver.html" class="rounded-xl bg-lime px-5 py-3.5 text-sm font-extrabold text-ink transition hover:bg-white">Voir les chauffeurs et réserver →</a>
+            <a href="chauffeurs.html" class="rounded-xl border border-white/20 px-5 py-3.5 text-sm font-bold text-white transition hover:bg-white/10">Devenir chauffeur partenaire</a>
+          </div>
+          <div class="mt-8 flex flex-wrap gap-3 text-sm font-semibold text-white/85">
+            <span class="rounded-xl bg-white/5 px-3 py-2"><span class="mr-2 text-lime">✓</span>Chauffeurs partenaires</span>
+            <span class="rounded-xl bg-white/5 px-3 py-2"><span class="mr-2 text-lime">✓</span>Tarif estimé à l’avance</span>
+            <span class="rounded-xl bg-white/5 px-3 py-2"><span class="mr-2 text-lime">✓</span>Assistance 24h/24</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="zones" class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+      <div class="max-w-2xl">
+        <p class="text-xs font-bold uppercase tracking-[.16em] text-forest">Nos destinations</p>
+        <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Bangboka et toute la ville.</h2>
+        <p class="mt-3 text-sm leading-6 text-ink/60">Les trajets desservent les principales communes de Kisangani et sont confirmés par la régie.</p>
+      </div>
+      <div class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <article class="rounded-2xl border border-ink/5 bg-white p-4"><span class="text-xs font-bold text-forest">01</span><h3 class="mt-4 font-bold">Makiso & centre</h3><p class="mt-1 text-xs leading-5 text-ink/55">Centre-ville, hôtels et services</p></article>
+        <article class="rounded-2xl border border-ink/5 bg-white p-4"><span class="text-xs font-bold text-forest">02</span><h3 class="mt-4 font-bold">Tshopo & Mangobo</h3><p class="mt-1 text-xs leading-5 text-ink/55">Quartiers et axes nord</p></article>
+        <article class="rounded-2xl border border-ink/5 bg-white p-4"><span class="text-xs font-bold text-forest">03</span><h3 class="mt-4 font-bold">Kabondo & Lubunga</h3><p class="mt-1 text-xs leading-5 text-ink/55">Prise en charge sur demande</p></article>
+        <article class="rounded-2xl border border-ink/5 bg-white p-4"><span class="text-xs font-bold text-forest">04</span><h3 class="mt-4 font-bold">Simi-Simi & Kilimani</h3><p class="mt-1 text-xs leading-5 text-ink/55">Et autres destinations à Kisangani</p></article>
+      </div>
+    </section>
+    <section id="carte" class="bg-white px-4 py-14 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="flex flex-col justify-between gap-5 md:flex-row md:items-end">
+          <div class="max-w-2xl">
+            <p class="text-xs font-bold uppercase tracking-[.16em] text-forest">Carte GPS de Kisangani</p>
+            <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Repérez-vous sur le trajet.</h2>
+            <p class="mt-3 text-sm leading-6 text-ink/60">La carte montre Kisangani et l’aéroport de Bangboka. Autorisez la géolocalisation pour suivre en direct la position de cet appareil pendant que cette page reste ouverte.</p>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <button id="gps-start" type="button" class="rounded-xl bg-forest px-4 py-3 text-sm font-bold text-white hover:bg-ink">Activer mon GPS</button>
+            <button id="gps-stop" type="button" class="hidden rounded-xl border border-ink/15 px-4 py-3 text-sm font-bold text-ink hover:bg-mist">Arrêter le suivi</button>
+          </div>
+        </div>
+        <p id="gps-status" class="mt-4 rounded-xl bg-mist px-4 py-3 text-sm text-ink/65" role="status">Le GPS est désactivé. Appuyez sur « Activer mon GPS » pour partager votre position avec cette carte.</p>
+        <div id="map-error" class="mt-4 hidden rounded-xl bg-amber-50 px-4 py-3 text-sm text-amber-900" role="status"></div>
+        <div id="kisangani-map" class="mt-4 overflow-hidden rounded-3xl border border-ink/10 bg-mist" aria-label="Carte interactive de Kisangani et de l’aéroport de Bangboka"></div>
+        <p class="mt-3 text-xs leading-5 text-ink/45">La position GPS est utilisée uniquement pour déplacer le marqueur de cette carte et n’est pas enregistrée. Le partage de la position d’un chauffeur vers le client en temps réel nécessite une connexion serveur qui n’est pas incluse dans cette maquette.</p>
+      </div>
+    </section>
+    <section class="bg-lime">
+      <div class="mx-auto flex max-w-7xl flex-col gap-5 px-4 py-10 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
+        <div><p class="text-xs font-bold uppercase tracking-[.16em] text-forest">Partenariat</p><h2 class="mt-2 text-2xl font-extrabold">Vous êtes chauffeur à Kisangani ?</h2><p class="mt-2 text-sm text-ink/70">Présentez votre candidature pour rejoindre le réseau TransNet.</p></div>
+        <a href="chauffeurs.html" class="rounded-xl bg-ink px-5 py-3 text-center text-sm font-bold text-white hover:bg-forest">S’inscrire comme chauffeur →</a>
+      </div>
+    </section>
+  </main>
+  <footer id="contact" class="bg-ink text-white">
+    <div class="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-3 lg:px-8">
+      <div><p class="brand font-extrabold">TransNet Kisangani</p><p class="mt-3 max-w-xs text-sm leading-6 text-white/55">Votre solution de transport entre l’aéroport de Bangboka et Kisangani.</p></div>
+      <div><h2 class="text-sm font-bold">Navigation</h2><div class="mt-3 grid gap-2 text-sm text-white/60"><a href="reserver.html" class="hover:text-lime">Réserver un trajet</a><a href="#zones" class="hover:text-lime">Zones desservies</a><a href="chauffeurs.html" class="hover:text-lime">Chauffeurs partenaires</a></div></div>
+      <div><h2 class="text-sm font-bold">Suivi des vols à Bangboka</h2><p class="mt-3 text-sm leading-6 text-white/60">Indiquez votre numéro de vol lors de la réservation. La régie confirmera l’horaire de prise en charge.</p></div>
+    </div>
+    <div class="border-t border-white/10"><div class="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-5 text-xs text-white/40 sm:px-6 md:flex-row md:justify-between lg:px-8"><p>© <span data-current-year></span> TransNet Kisangani.</p><p>Service de réservation — Kisangani, RDC</p><p>Site créé par Samuel Badjoko.</p></div></div>
+  </footer>
+</body>
+</html>

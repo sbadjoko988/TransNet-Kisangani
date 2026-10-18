@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b2634">
+  <meta name="description" content="Inscrivez-vous comme chauffeur partenaire TransNet à Kisangani.">
+  <title>Inscription chauffeur — TransNet Kisangani</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { theme: { extend: { colors: { ink: '#0b2634', forest: '#0d6655', lime: '#d5f36a', mist: '#f4f7f3' } } } };</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>body{font-family:'DM Sans',sans-serif}h1,h2,h3,.brand{font-family:'Manrope',sans-serif}</style>
+  <script src="app.js" defer></script>
+</head>
+<body class="bg-mist text-ink antialiased">
+  <div class="bg-ink text-white"><div class="mx-auto flex max-w-7xl justify-between gap-3 px-4 py-2.5 text-xs sm:px-6 lg:px-8"><p>Réseau de chauffeurs partenaires · Kisangani</p><a href="index.html#contact" class="font-semibold text-lime">Contact ↗</a></div></div>
+  <header class="sticky top-0 z-30 border-b border-ink/5 bg-white/95 backdrop-blur">
+    <div class="mx-auto flex max-w-7xl items-center justify-between gap-5 px-4 py-4 sm:px-6 lg:px-8">
+      <a href="index.html" class="brand flex items-center gap-3"><span class="grid h-11 w-11 place-items-center rounded-2xl bg-forest font-extrabold text-lime">TN</span><span><span class="block font-extrabold">TransNet</span><span class="block text-[11px] font-bold tracking-[.16em] text-forest">KISANGANI</span></span></a>
+      <nav class="hidden items-center gap-7 text-sm font-semibold text-ink/75 lg:flex" aria-label="Navigation principale"><a href="index.html" class="hover:text-forest">Accueil</a><a href="reserver.html" class="hover:text-forest">Réserver</a><a href="index.html#zones" class="hover:text-forest">Zones</a><a href="index.html#carte" class="hover:text-forest">Carte GPS</a><a href="chauffeurs.html" aria-current="page" class="text-forest">Chauffeurs</a><a href="index.html#contact" class="hover:text-forest">Contact</a></nav>
+      <label for="language" class="sr-only">Langue</label><select id="language" class="rounded-xl border border-ink/10 bg-white px-2.5 py-2 text-xs font-bold outline-none focus:border-forest" aria-label="Choisir la langue"><option value="fr">FR</option><option value="sw">SW</option></select>
+      <button class="grid h-10 w-10 place-items-center rounded-xl border border-ink/10 lg:hidden" data-menu-toggle aria-expanded="false" aria-controls="mobile-menu" aria-label="Ouvrir le menu"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/></svg></button>
+    </div>
+    <nav id="mobile-menu" class="hidden border-t border-ink/5 bg-white px-4 py-3 lg:hidden" aria-label="Navigation mobile"><div class="mx-auto grid max-w-7xl gap-1 text-sm font-semibold"><a href="index.html" class="rounded-lg px-3 py-2">Accueil</a><a href="reserver.html" class="rounded-lg px-3 py-2">Réserver</a><a href="index.html#zones" class="rounded-lg px-3 py-2">Zones</a><a href="index.html#carte" class="rounded-lg px-3 py-2">Carte GPS</a><a href="chauffeurs.html" aria-current="page" class="rounded-lg px-3 py-2 text-forest">Chauffeurs</a><a href="index.html#contact" class="rounded-lg px-3 py-2">Contact</a></div></nav>
+  </header>
+  <main>
+    <section class="bg-ink px-4 py-12 text-white sm:px-6 lg:px-8"><div class="mx-auto max-w-4xl"><p class="text-xs font-bold uppercase tracking-[.16em] text-lime">Partenariat TransNet</p><h1 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Espace chauffeur</h1><p class="mt-3 max-w-2xl text-sm leading-6 text-white/65">Consultez les demandes de trajet et acceptez celles qui vous conviennent, puis inscrivez votre véhicule dans le réseau.</p></div></section>
+    <section class="mx-auto max-w-4xl px-4 pt-10 sm:px-6 lg:px-8" aria-labelledby="driver-requests-heading">
+      <div class="rounded-3xl border border-ink/5 bg-white p-5 shadow-sm sm:p-8">
+        <p class="text-xs font-bold uppercase tracking-[.16em] text-forest">Demandes de trajet</p>
+        <h2 id="driver-requests-heading" class="mt-2 text-2xl font-extrabold">Accepter un marché</h2>
+        <p class="mt-2 text-sm leading-6 text-ink/55">Les demandes créées depuis la page Réserver apparaissent ici sur le même navigateur. Accepter une demande ne vous marque pas encore occupé : c’est le client qui finalise le marché.</p>
+        <div id="driver-requests" class="mt-5 grid gap-3"></div>
+        <p id="driver-requests-empty" class="mt-4 rounded-2xl bg-mist p-4 text-sm text-ink/55">Aucune nouvelle demande pour le moment.</p>
+        <p id="driver-requests-message" class="mt-4 hidden rounded-xl bg-amber-50 px-4 py-3 text-sm text-amber-900" role="status"></p>
+      </div>
+    </section>
+    <section class="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
+      <form id="driver-form" class="rounded-3xl border border-ink/5 bg-white p-5 shadow-sm sm:p-8">
+        <fieldset><legend class="text-lg font-extrabold">Identité et coordonnées</legend>
+          <div class="mt-5 grid gap-4 sm:grid-cols-2">
+            <label class="text-sm font-semibold" for="driver-last-name">Nom<input id="driver-last-name" name="lastName" autocomplete="family-name" required class="mt-2 w-full rounded-xl border border-ink/10 px-3 py-3 text-sm font-medium outline-none focus:border-forest focus:ring-2 focus:ring-forest/10"></label>
+            <label class="text-sm font-semibold" for="driver-post-name">Postnom<input id="driver-post-name" name="postName" required class="mt-2 w-full rounded-xl border border-ink/10 px-3 py-3 text-sm font-medium outline-none focus:border-forest focus:ring-2 focus:ring-forest/10"></label>
+            <label class="text-sm font-semibold" for="driver-first-name">Prénom<input id="driver-first-name" name="firstName" autocomplete="given-name" required class="mt-2 w-full rounded-xl border border-ink/10 px-3 py-3 text-sm font-medium outline-none focus:border-forest focus:ring-2 focus:ring-forest/10"></label>
+            <label class="text-sm font-semibold" for="driver-birth-date">Date de naissance<input id="driver-birth-date" name="birthDate" type="date" autocomplete="bday" required class="mt-2 w-full rounded-xl border border-ink/10 px-3 py-3 text-sm font-medium outline-none focus:border-forest focus:ring-2 focus:ring-forest/10"></label>
+            <label class="text-sm font-semibold" for="driver-phone">Téléphone / WhatsApp<input id="driver-phone" name="phone" type="tel" autocomplete="tel" required placeholder="+243 …" class="mt-2 w-full rounded-xl border border-ink/10 px-3 py-3 text-sm font-medium outline-none placeholder:text-ink/35 focus:border-forest focus:ring-2 focus:ring-forest/10"></label>
+            <label class="text-sm font-semibold" for="driver-email">Adresse e-mail<input id="driver-email" name="email" type="email" autocomplete="email" required placeholder="vous@exemple.com" class="mt-2 w-full rounded-xl border border-ink/10 px-3 py-3 text-sm font-medium outline-none placeholder:text-ink/35 focus:border-forest focus:ring-2 focus:ring-forest/10"></label>
+            <label class="text-sm font-semibold sm:col-span-2" for="driver-address">Adresse de résidence à Kisangani<input id="driver-address" name="address" autocomplete="street-address" required placeholder="Commune, quartier, avenue" class="mt-2 w-full rounded-xl border border-ink/10 px-3 py-3 text-sm font-medium outline-none placeholder:text-ink/35 focus:border-forest focus:ring-2 focus:ring-forest/10"></label>
+            <label class="text-sm font-semibold sm:col-span-2" for="voter-card-number">Numéro national de la carte d’électeur<input id="voter-card-number" name="voterCardNumber" autocomplete="off" required aria-describedby="voter-card-privacy" placeholder="Numéro figurant sur votre carte" class="mt-2 w-full rounded-xl border border-ink/10 px-3 py-3 text-sm font-medium outline-none placeholder:text-ink/35 focus:border-forest focus:ring-2 focus:ring-forest/10"><span id="voter-card-privacy" class="mt-2 block text-xs font-normal leading-5 text-ink/55">Ne saisissez pas de vrai numéro dans cette maquette. Cette information n’est jamais enregistrée dans le navigateur ni affichée dans l’annuaire. En production, sa collecte devra être sécurisée par un serveur.</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="mt-8 border-t border-ink/10 pt-7"><legend class="text-lg font-extrabold">Véhicule proposé</legend>
+          <div class="mt-5 grid gap-4 sm:grid-cols-2">
+            <label class="text-sm font-semibold" for="vehicle-make">Marque du véhicule<input id="vehicle-make" name="vehicleMake" required placeholder="Ex. Toyota, Nissan, Hyundai" class="mt-2 w-full rounded-xl border border-ink/10 px-3 py-3 text-sm font-medium outline-none placeholder:text-ink/35 focus:border-forest focus:ring-2 focus:ring-forest/10"></label>
+            <label class="text-sm font-semibold" for="vehicle-model">Modèle<input id="vehicle-model" name="vehicleModel" required placeholder="Ex. Corolla, Patrol" class="mt-2 w-full rounded-xl border border-ink/10 px-3 py-3 text-sm font-medium outline-none placeholder:text-ink/35 focus:border-forest focus:ring-2 focus:ring-forest/10"></label>
+            <label class="text-sm font-semibold" for="vehicle-year">Année de fabrication<input id="vehicle-year" name="vehicleYear" type="number" min="1980" max="2026" required placeholder="Ex. 2018" class="mt-2 w-full rounded-xl border border-ink/10 px-3 py-3 text-sm font-medium outline-none placeholder:text-ink/35 focus:border-forest focus:ring-2 focus:ring-forest/10"></label>
+            <label class="text-sm font-semibold" for="vehicle-plate">Numéro d’immatriculation<input id="vehicle-plate" name="vehiclePlate" required placeholder="Plaque du véhicule" class="mt-2 w-full rounded-xl border border-ink/10 px-3 py-3 text-sm font-medium uppercase outline-none placeholder:font-normal placeholder:normal-case placeholder:text-ink/35 focus:border-forest focus:ring-2 focus:ring-forest/10"></label>
+            <label class="text-sm font-semibold" for="driver-availability">Disponibilité initiale<select id="driver-availability" name="availability" class="mt-2 w-full rounded-xl border border-ink/10 bg-white px-3 py-3 text-sm outline-none focus:border-forest"><option value="free">Libre</option><option value="busy">Occupé</option></select></label>
+          </div>
+        </fieldset>
+        <label class="mt-6 flex items-start gap-3 rounded-2xl bg-mist p-4 text-xs leading-5 text-ink/70"><input id="directory-consent" name="directoryConsent" type="checkbox" required class="mt-1 accent-forest"><span>J’accepte que mon nom, mon véhicule, ma plaque et ma disponibilité apparaissent dans l’annuaire de démonstration de ce navigateur.</span></label>
+        <button type="submit" class="mt-6 w-full rounded-xl bg-forest px-5 py-3.5 text-sm font-bold text-white hover:bg-ink sm:w-auto">Enregistrer ma fiche de démonstration →</button>
+        <p id="driver-form-message" class="mt-4 hidden rounded-xl bg-amber-50 px-4 py-3 text-sm leading-5 text-amber-900" role="status"></p>
+        <p class="mt-4 text-xs leading-5 text-ink/45">Prototype sans serveur : seule la fiche d’annuaire (nom, véhicule, plaque, disponibilité) est enregistrée localement sur cet appareil. Les autres champs, y compris la carte d’électeur, ne sont pas conservés ni envoyés. L’annuaire ne se synchronise pas entre appareils.</p>
+      </form>
+    </section>
+  </main>
+  <footer class="bg-ink text-white"><div class="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-6 text-xs text-white/50 sm:px-6 md:flex-row md:justify-between lg:px-8"><a href="index.html" class="font-bold text-white">TransNet Kisangani</a><p>© <span data-current-year></span> · <a href="reserver.html" class="hover:text-lime">Voir les chauffeurs</a></p><p>Site créé par Samuel Badjoko.</p></div></footer>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b2634">
+  <meta name="description" content="Choisissez un chauffeur libre et demandez votre trajet à Kisangani.">
+  <title>Réserver — TransNet Kisangani</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { theme: { extend: { colors: { ink: '#0b2634', forest: '#0d6655', lime: '#d5f36a', mist: '#f4f7f3' } } } };</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>body{font-family:'DM Sans',sans-serif}h1,h2,h3,.brand{font-family:'Manrope',sans-serif}</style>
+  <script src="app.js" defer></script>
+</head>
+<body class="bg-mist text-ink antialiased">
+  <div class="bg-ink text-white"><div class="mx-auto flex max-w-7xl justify-between gap-3 px-4 py-2.5 text-xs sm:px-6 lg:px-8"><p>Assistance voyageurs disponible 24h/24 et 7j/7</p><a href="index.html#contact" class="font-semibold text-lime">Contact ↗</a></div></div>
+  <header class="sticky top-0 z-30 border-b border-ink/5 bg-white/95 backdrop-blur">
+    <div class="mx-auto flex max-w-7xl items-center justify-between gap-5 px-4 py-4 sm:px-6 lg:px-8">
+      <a href="index.html" class="brand flex items-center gap-3"><span class="grid h-11 w-11 place-items-center rounded-2xl bg-forest font-extrabold text-lime">TN</span><span><span class="block font-extrabold">TransNet</span><span class="block text-[11px] font-bold tracking-[.16em] text-forest">KISANGANI</span></span></a>
+      <nav class="hidden items-center gap-7 text-sm font-semibold text-ink/75 lg:flex" aria-label="Navigation principale"><a href="index.html" class="hover:text-forest">Accueil</a><a href="reserver.html" aria-current="page" class="text-forest">Réserver</a><a href="index.html#zones" class="hover:text-forest">Zones</a><a href="index.html#carte" class="hover:text-forest">Carte GPS</a><a href="chauffeurs.html" class="hover:text-forest">Chauffeurs</a><a href="index.html#contact" class="hover:text-forest">Contact</a></nav>
+      <label for="language" class="sr-only">Langue</label><select id="language" class="rounded-xl border border-ink/10 bg-white px-2.5 py-2 text-xs font-bold outline-none focus:border-forest" aria-label="Choisir la langue"><option value="fr">FR</option><option value="sw">SW</option></select>
+      <button class="grid h-10 w-10 place-items-center rounded-xl border border-ink/10 lg:hidden" data-menu-toggle aria-expanded="false" aria-controls="mobile-menu" aria-label="Ouvrir le menu"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/></svg></button>
+    </div>
+    <nav id="mobile-menu" class="hidden border-t border-ink/5 bg-white px-4 py-3 lg:hidden" aria-label="Navigation mobile"><div class="mx-auto grid max-w-7xl gap-1 text-sm font-semibold"><a href="index.html" class="rounded-lg px-3 py-2">Accueil</a><a href="reserver.html" aria-current="page" class="rounded-lg px-3 py-2 text-forest">Réserver</a><a href="index.html#zones" class="rounded-lg px-3 py-2">Zones</a><a href="index.html#carte" class="rounded-lg px-3 py-2">Carte GPS</a><a href="chauffeurs.html" class="rounded-lg px-3 py-2">Chauffeurs</a><a href="index.html#contact" class="rounded-lg px-3 py-2">Contact</a></div></nav>
+  </header>
+  <main>
+    <section class="bg-ink px-4 py-12 text-white sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl"><p class="text-xs font-bold uppercase tracking-[.16em] text-lime">Réservation</p><h1 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Choisissez votre chauffeur</h1><p class="mt-3 max-w-2xl text-sm leading-6 text-white/65">Consultez les chauffeurs partenaires par disponibilité. Seuls les chauffeurs libres peuvent être sélectionnés pour une demande de trajet.</p></div>
+    </section>
+    <section class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      <div class="mb-10 flex flex-wrap items-center justify-between gap-3"><div><h2 class="text-2xl font-extrabold">Chauffeurs inscrits</h2><p class="mt-1 text-sm text-ink/55">La disponibilité affichée est indicative et doit être confirmée par la régie.</p></div><a href="chauffeurs.html" class="rounded-xl border border-forest px-4 py-2.5 text-sm font-bold text-forest hover:bg-forest hover:text-white">Inscrire un chauffeur →</a></div>
+      <section aria-labelledby="free-heading">
+        <h3 id="free-heading" class="flex items-center gap-2 text-lg font-extrabold"><span class="h-2.5 w-2.5 rounded-full bg-emerald-500"></span>Libres <span id="free-count" class="rounded-full bg-emerald-100 px-2 py-0.5 text-xs text-emerald-800">0</span></h3>
+        <div id="free-drivers" class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
+        <p id="free-empty" class="mt-4 hidden rounded-2xl bg-white p-5 text-sm text-ink/55">Aucun chauffeur libre n’est inscrit pour le moment.</p>
+      </section>
+      <section class="mt-10" aria-labelledby="busy-heading">
+        <h3 id="busy-heading" class="flex items-center gap-2 text-lg font-extrabold"><span class="h-2.5 w-2.5 rounded-full bg-amber-500"></span>Occupés <span id="busy-count" class="rounded-full bg-amber-100 px-2 py-0.5 text-xs text-amber-900">0</span></h3>
+        <div id="busy-drivers" class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
+        <p id="busy-empty" class="mt-4 hidden rounded-2xl bg-white p-5 text-sm text-ink/55">Aucun chauffeur occupé pour le moment.</p>
+      </section>
+      <p id="directory-message" class="mt-5 hidden rounded-xl bg-amber-50 px-4 py-3 text-sm text-amber-900" role="status"></p>
+      <section id="client-requests-section" class="mt-12 hidden" aria-labelledby="client-requests-heading">
+        <h2 id="client-requests-heading" class="text-2xl font-extrabold">Suivi de vos demandes sur cet appareil</h2>
+        <p class="mt-2 text-sm text-ink/55">Après acceptation du chauffeur, finalisez le marché ici. La finalisation marquera ce chauffeur comme occupé.</p>
+        <div id="client-requests" class="mt-4 grid gap-4"></div>
+      </section>
+      <div id="booking" class="mt-14 grid scroll-mt-28 gap-8 lg:grid-cols-[.8fr_1.2fr]">
+        <div><p class="text-xs font-bold uppercase tracking-[.16em] text-forest">Votre demande</p><h2 class="mt-3 text-3xl font-extrabold tracking-tight">Détails du trajet</h2><p class="mt-3 text-sm leading-6 text-ink/60">Choisissez un chauffeur libre, envoyez-lui votre demande, puis finalisez le marché après son acceptation.</p><div class="mt-5 rounded-2xl border border-ink/5 bg-white p-4"><p class="text-xs font-bold uppercase tracking-wider text-ink/45">Chauffeur choisi</p><p id="selected-driver-name" class="mt-2 text-sm font-bold">Aucun chauffeur sélectionné</p><button id="clear-driver" class="mt-2 hidden text-xs font-bold text-forest underline" type="button">Retirer ce choix</button></div></div>
+        <form id="booking-form" class="space-y-5 rounded-3xl bg-white p-5 shadow-sm sm:p-7">
+          <input id="selected-driver-id" name="driverId" type="hidden">
+          <fieldset><legend class="mb-2 text-sm font-bold">Quand souhaitez-vous voyager ?</legend><div class="grid grid-cols-2 gap-2 rounded-2xl bg-mist p-1.5"><label class="cursor-pointer"><input class="peer sr-only" type="radio" name="rideType" value="immediate" checked><span class="block rounded-xl px-3 py-2.5 text-center text-sm font-semibold text-ink/60 peer-checked:bg-forest peer-checked:text-white">Immédiat</span></label><label class="cursor-pointer"><input class="peer sr-only" type="radio" name="rideType" value="scheduled"><span class="block rounded-xl px-3 py-2.5 text-center text-sm font-semibold text-ink/60 peer-checked:bg-forest peer-checked:text-white">Planifié</span></label></div></fieldset>
+          <div class="grid gap-3 sm:grid-cols-2">
+            <label class="text-sm font-semibold" for="pickup">Lieu de départ<select id="pickup" name="pickup" required class="mt-2 w-full rounded-xl border border-ink/10 bg-white px-3 py-3 text-sm outline-none focus:border-forest"><option value="Bangboka" data-fare="0">Aéroport de Bangboka</option><option value="Makiso" data-fare="4">Makiso</option><option value="Tshopo" data-fare="5">Tshopo</option><option value="Mangobo" data-fare="6">Mangobo</option><option value="Kabondo" data-fare="5">Kabondo</option><option value="Kisangani" data-fare="4">Centre de Kisangani</option><option value="Lubunga" data-fare="8">Lubunga</option><option value="Simi-Simi" data-fare="6">Simi-Simi</option><option value="Kilimani" data-fare="6">Kilimani</option><option value="Autre">Autre adresse</option></select></label>
+            <label class="text-sm font-semibold" for="destination">Destination<select id="destination" name="destination" required class="mt-2 w-full rounded-xl border border-ink/10 bg-white px-3 py-3 text-sm outline-none focus:border-forest"><option value="Makiso" data-fare="4">Makiso</option><option value="Tshopo" data-fare="5">Tshopo</option><option value="Mangobo" data-fare="6">Mangobo</option><option value="Kabondo" data-fare="5">Kabondo</option><option value="Kisangani" data-fare="4">Centre de Kisangani</option><option value="Lubunga" data-fare="8">Lubunga</option><option value="Simi-Simi" data-fare="6">Simi-Simi</option><option value="Kilimani" data-fare="6">Kilimani</option><option value="Bangboka" data-fare="0">Aéroport de Bangboka</option><option value="Autre">Autre adresse</option></select></label>
+          </div>
+          <div class="grid gap-3 sm:grid-cols-2">
+            <label class="text-sm font-semibold" for="pickup-address">Précision d’adresse<input id="pickup-address" name="address" placeholder="Quartier, avenue, repère…" class="mt-2 w-full rounded-xl border border-ink/10 px-3 py-3 text-sm font-normal outline-none focus:border-forest"></label>
+            <label class="text-sm font-semibold" for="flight-number">Numéro de vol<input id="flight-number" name="flightNumber" placeholder="Ex. 4Z 123" class="mt-2 w-full rounded-xl border border-ink/10 px-3 py-3 text-sm font-normal outline-none focus:border-forest"></label>
+          </div>
+          <div id="schedule-fields" class="hidden grid gap-3 sm:grid-cols-2">
+            <label class="text-sm font-semibold" for="travel-date">Date<input id="travel-date" name="travelDate" type="date" class="mt-2 w-full rounded-xl border border-ink/10 px-3 py-3 text-sm outline-none focus:border-forest"></label>
+            <label class="text-sm font-semibold" for="travel-time">Heure du vol / trajet<input id="travel-time" name="travelTime" type="time" class="mt-2 w-full rounded-xl border border-ink/10 px-3 py-3 text-sm outline-none focus:border-forest"></label>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <label class="text-sm font-semibold" for="passengers">Passagers<select id="passengers" name="passengers" class="mt-2 w-full rounded-xl border border-ink/10 bg-white px-3 py-3 text-sm"><option value="1">1 passager</option><option value="2">2 passagers</option><option value="3">3 passagers</option><option value="4">4 passagers</option><option value="5">5 passagers</option><option value="6">6 passagers</option></select></label>
+            <label class="text-sm font-semibold" for="bags">Bagages<select id="bags" name="bags" class="mt-2 w-full rounded-xl border border-ink/10 bg-white px-3 py-3 text-sm"><option value="0">Aucun</option><option value="1">1 bagage</option><option value="2">2 bagages</option><option value="3">3 bagages</option><option value="4">4 bagages ou plus</option></select></label>
+          </div>
+          <div class="rounded-2xl bg-ink p-4 text-white"><div class="flex items-center justify-between gap-3"><div><p class="text-xs text-white/60">Estimation indicative</p><p id="fare-route" class="mt-1 text-xs text-white/75">Bangboka → Makiso</p></div><div class="text-right"><p id="fare-usd" class="text-2xl font-extrabold">$25</p><p id="fare-cdf" class="text-xs font-semibold text-lime">≈ 58 750 CDF</p></div></div><p class="mt-3 border-t border-white/10 pt-3 text-[10px] leading-4 text-white/50">Taux de référence maquette : 1 USD = 2 350 CDF. Tarif à confirmer par la régie.</p></div>
+          <button id="booking-submit" type="submit" class="w-full rounded-xl bg-forest px-5 py-3.5 text-sm font-bold text-white hover:bg-ink">Envoyer la demande au chauffeur →</button>
+          <p id="booking-message" class="hidden rounded-xl bg-amber-50 px-4 py-3 text-sm leading-5 text-amber-900" role="status"></p>
+          <p class="text-center text-[11px] leading-5 text-ink/45">Prototype local : les demandes ne sont visibles que dans ce navigateur et ne sont pas envoyées à la régie.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+  <footer class="bg-ink text-white"><div class="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-6 text-xs text-white/50 sm:px-6 md:flex-row md:justify-between lg:px-8"><a href="index.html" class="font-bold text-white">TransNet Kisangani</a><p>© <span data-current-year></span> · <a href="index.html#contact" class="hover:text-lime">Contact & informations</a></p><p>Site créé par Samuel Badjoko.</p></div></footer>
+</body>
+</html>
